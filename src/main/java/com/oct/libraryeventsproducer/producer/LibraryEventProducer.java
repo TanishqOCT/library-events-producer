@@ -27,7 +27,7 @@ public class LibraryEventProducer {
     Integer key = libraryEvent.getLibraryEventId();
     String value = objectMapper.writeValueAsString(libraryEvent);
     //we can also use send(topicName, key, value)
-    ListenableFuture<SendResult<Integer, String>> listenableFuture = kafkaTemplate.sendDefault(key, value);
+    ListenableFuture<SendResult<Integer, String>> listenableFuture = kafkaTemplate.send("test_topic_kafka", key, value);
     listenableFuture.addCallback(new ListenableFutureCallback<>() {
       @Override
       public void onFailure(Throwable ex) {

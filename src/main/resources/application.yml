@@ -2,15 +2,32 @@ spring:
   profiles:
     active: local
 ---
+#spring:
+#  profiles: local
+#  kafka:
+#    template:
+#      default-topic: test_topic_kafka
+#    producer:
+#      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+#      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    admin:
+#      properties:
+#        bootstrap.servers: localhost:9092, localhost:9093, localhost:9094
+
+---
+
 spring:
-  profiles: local
   kafka:
-    template:
-      default-topic: library-events
+    properties:
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='RT5B6NKAVW3P22YW' password='+6dIiny7UHqa1jc6cIbCmzk5hVQ6UQmq1dtjydLyiWphsVglCJHHuN3dY10+RvZ8';
+      bootstrap:
+        servers: pkc-ldvr1.asia-southeast1.gcp.confluent.cloud:9092
+      security:
+        protocol: SASL_SSL
     producer:
-      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
       key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    admin:
-      properties:
-        bootstrap.servers: localhost:9092, localhost:9093, localhost:9094
